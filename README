@@ -1,0 +1,33 @@
+Radu Cosmin 323 CB
+
+Tema 3 - AST
+
+Am inceput implementarea functiei atoi verificand daca numarul primit ca
+sir este negativ sau nu. Daca era negativ, retineam in ebx 0 pentru a converti
+la final rezultatul. Apoi am extras din sir cate un caracter si l-am convertit
+in cifra. Inmulteam, folosind imul, edi(rezultatul partial) cu 10 si apoi
+adaugam noua cifra in edi. Continuam procesul pana intalneam \0 sau \n(din
+cauza faptului ca in create_nodes, daca nodul final este spre exemplu 8\n,
+eu il retin in acest fel in arbore). Daca numarul era negativ, scadeam edi din
+ebx si puneam rezultatul in eax, daca nu il puneam direct in eax.
+
+La implementarea functiei ce creeaza arborele am utilizat functiile strdup,
+strtok si calloc din C. La inceput am apelat strtok pe sirul dat ca parametru
+functiei create_tree pentru a extrage primul simbol. Apoi am apelat functia
+create_nodes cu acest simbol, functie care creeaza arborele.
+
+Functia create_nodes se apeleaza recursiv pentru a reprezenta secventa, prin
+urmare are doua conditii de oprire. Prima este accea ca daca se primeste ca
+parametru 0(null) inseamna ca strtok a ajuns la final, astfel si functia se
+opreste. A doua este daca parametrul primit este numar se creeaza un nod
+pentru acesta si este returnat.
+
+In create_nodes mai intai aloc memorie pentru structura unui nod(12 octeti mai
+exact), iar apoi copiez si aloc memorie pentru valoarea nodului. Dupa aceea,
+apelez din nou strtok si functia create_nodes. Dupa aceasta leg rezultatul
+functiei in partea stanga a nodului creat si repet procesul pentru a crea si
+partea dreapta.
+
+Functia recursiva returneaza rezultatul in esi, insa retine o copie a acestuia
+si in eax. Astfel, in functia create_tree, dupa apelul functiei create_nodes
+rezultatul va fi direct in eax.
